@@ -10,16 +10,23 @@ public class Player : MonoBehaviour {
 
     Rigidbody2D rigid;
     GameObject flipper;
+    HingeJoint2D flipperJoint;
     bool onGround = false;
     int jumpCount = 0;
+    bool flipperPaused = false;
 
 	// Use this for initialization
 	void Start () {
         rigid = GetComponent<Rigidbody2D>();
         flipper = transform.Find("Flipper").gameObject;
+        flipperJoint = flipper.GetComponent<HingeJoint2D>();
+
+        flipperJoint.useMotor = true;
 	}
 	
 	// Update is called once per frame
+    // Conceptual mechanics : move left-right, jump, double jump, climb, pinch
+    // Control Mechanics: left-right, jump, double jump, pause/start rotation
 	void Update () {
         if (Input.GetButtonDown("Vertical")) 
         {
@@ -27,7 +34,8 @@ public class Player : MonoBehaviour {
             {
                 jumpCount++;
                 rigid.velocity = new Vector2(rigid.velocity.x, 0f);
-                rigid.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+                float secondJumpPenalty = jumpCount > 0 ? 0.75f : 1f;
+                rigid.AddForce(transform.up * jumpForce * secondJumpPenalty, ForceMode2D.Impulse);
             }
         }
 
@@ -37,16 +45,11 @@ public class Player : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("stop motor");
-            HingeJoint2D joint = flipper.GetComponent<HingeJoint2D>();
-            joint.useMotor = false;
-            flipper.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+            StopFlipper();
         }
         else if (Input.GetButtonUp("Fire1"))
         {
-            Debug.Log("restart motor");
-            HingeJoint2D joint = flipper.GetComponent<HingeJoint2D>();
-            joint.useMotor = true;
+            RestartFlipper();
         }
         
         if (Mathf.Abs(rigid.velocity.x) > maxVelX)
@@ -54,8 +57,38 @@ public class Player : MonoBehaviour {
             Debug.Log("Trimming horizontal velocity");
             rigid.velocity = new Vector2(maxVelX * Mathf.Sign(rigid.velocity.x), rigid.velocity.y);
         }
+
+        if (!flipperPaused &&
+            Mathf.Abs(
+                flipper.GetComponent<Rigidbody2D>().angularVelocity) < 0.001f)
+        {
+            Debug.Log("Uh...is everything okay?");
+            Debug.Log(flipper.GetComponent<Rigidbody2D>().angularVelocity);
+            StopFlipper();
+            StartCoroutine(RestartFlipperWithDelay(0.5f));
+        }
 	}
 
+    private void StopFlipper()
+    {
+        Debug.Log("stop motor");
+        flipperJoint.useMotor = false;
+        flipperPaused = true;
+        flipper.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+    }
+
+    private void RestartFlipper()
+    {
+        Debug.Log("restart motor");
+        flipperJoint.useMotor = true;
+        flipperPaused = false;
+    }
+
+    private IEnumerator RestartFlipperWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        RestartFlipper();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Ground"))

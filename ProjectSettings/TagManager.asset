@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -39,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3281974957
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -47,4 +51,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1821770203
+    locked: 0
+  - name: Foreground
+    uniqueID: 2220792729
     locked: 0

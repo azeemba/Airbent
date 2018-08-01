@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 9670698}
   m_Layer: 0
   m_Name: Wall (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 102322170}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 287282441}
   m_Layer: 0
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -659,7 +659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &472122895
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -696,7 +696,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5188d4e946d21b04baa6e0615fdd651b, type: 3}
-  m_Color: {r: 0.9811321, g: 0.5960543, b: 0.013883919, a: 1}
+  m_Color: {r: 0.8867924, g: 0.8156817, b: 0.8156817, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -713,7 +713,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 472122894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.13, y: 1.17, z: -0.026367188}
+  m_LocalPosition: {x: -6.64, y: 1.8, z: -0.026367188}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -754,24 +754,17 @@ Rigidbody2D:
   m_SleepingMode: 2
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!232 &472122899
-DistanceJoint2D:
+--- !u!114 &472122899
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 472122894}
   m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 1723126337}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 1.2449999, y: 0}
-  m_AutoConfigureDistance: 1
-  m_Distance: 0.9555359
-  m_MaxDistanceOnly: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ded7b6516407cb4e83467a82d5950e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,7 +816,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.32840866, g: 0.33308116, b: 0.33962262, a: 0}
+  m_BackGroundColor: {r: 0.4895425, g: 0.50560695, b: 0.5377358, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -879,7 +872,7 @@ GameObject:
   - component: {fileID: 625719404}
   m_Layer: 0
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1484,7 +1477,7 @@ GameObject:
   - component: {fileID: 1642237913}
   m_Layer: 0
   m_Name: Wall (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1753,8 +1746,8 @@ MonoBehaviour:
   jumpTimesAllowed: 2
   speed: 30
   jumpForce: 22
-  maxVelX: 4
-  waitBeforeHelpfulReversing: 0.25
+  maxVelX: 6
+  waitBeforeHelpfulReversing: 0.1
 --- !u!4 &1762243481
 Transform:
   m_ObjectHideFlags: 0
@@ -1801,9 +1794,10 @@ GameObject:
   - component: {fileID: 1950419677}
   - component: {fileID: 1950419675}
   - component: {fileID: 1950419676}
+  - component: {fileID: 1950419678}
   m_Layer: 0
   m_Name: Wall (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1900,6 +1894,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1950419678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1950419674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8c4e2db0c610845971e52822f42536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2006630984
 GameObject:
   m_ObjectHideFlags: 0

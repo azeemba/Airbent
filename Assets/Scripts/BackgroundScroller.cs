@@ -26,7 +26,7 @@ public class BackgroundScroller : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        float curOffset = (Player.transform.position.x - offset.x) * 0.3f;
+        float curOffset = (Player.transform.position.x - offset.x); 
         for(int i = 0; i < scrollerBg.Count; ++i)
         {
             scrollerBg[i].transform.position = scrollerOffset[i] + Vector2.right*curOffset;

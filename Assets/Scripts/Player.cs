@@ -7,21 +7,20 @@ public class Player : MonoBehaviour {
     public int speed = 10;
     public int jumpForce = 10;
     public int maxVelX = 10;
+    public float waitBeforeHelpfulReversing = 0.25f;
 
     Rigidbody2D rigid;
     GameObject flipper;
-    HingeJoint2D flipperJoint;
+    JointMotor2D flipperMotor;
     bool onGround = false;
     int jumpCount = 0;
-    bool flipperPaused = false;
+    float stuckTimeDuration = 0f;
 
 	// Use this for initialization
 	void Start () {
         rigid = GetComponent<Rigidbody2D>();
         flipper = transform.Find("Flipper").gameObject;
-        flipperJoint = flipper.GetComponent<HingeJoint2D>();
-
-        flipperJoint.useMotor = true;
+        flipperMotor = flipper.GetComponent<HingeJoint2D>().motor;
 	}
 	
 	// Update is called once per frame
@@ -45,55 +44,49 @@ public class Player : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1"))
         {
-            StopFlipper();
+            ReverseFlipper();
         }
-        else if (Input.GetButtonUp("Fire1"))
-        {
-            RestartFlipper();
-        }
-        
+
         if (Mathf.Abs(rigid.velocity.x) > maxVelX)
         {
             Debug.Log("Trimming horizontal velocity");
             rigid.velocity = new Vector2(maxVelX * Mathf.Sign(rigid.velocity.x), rigid.velocity.y);
         }
 
-        if (!flipperPaused &&
-            Mathf.Abs(
+        if (Mathf.Abs(
                 flipper.GetComponent<Rigidbody2D>().angularVelocity) < 0.001f)
         {
-            Debug.Log("Uh...is everything okay?");
-            Debug.Log(flipper.GetComponent<Rigidbody2D>().angularVelocity);
-            StopFlipper();
-            StartCoroutine(RestartFlipperWithDelay(0.5f));
+            stuckTimeDuration += Time.deltaTime;
+            if (stuckTimeDuration > waitBeforeHelpfulReversing)
+            {
+                Debug.Log("Uh...is everything okay?");
+                Debug.Log(flipper.GetComponent<Rigidbody2D>().angularVelocity);
+                ReverseFlipper();
+            }
+        }
+        else
+        {
+            stuckTimeDuration = 0f;
         }
 	}
 
-    private void StopFlipper()
+    private void ReverseFlipper()
     {
-        Debug.Log("stop motor");
-        flipperJoint.useMotor = false;
-        flipperPaused = true;
         flipper.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+        flipperMotor.motorSpeed = -1f * flipperMotor.motorSpeed;
+        Debug.Log("Reverse motor to " + flipperMotor.motorSpeed);
+        flipper.GetComponent<HingeJoint2D>().motor = flipperMotor;
     }
 
-    private void RestartFlipper()
-    {
-        Debug.Log("restart motor");
-        flipperJoint.useMotor = true;
-        flipperPaused = false;
-    }
-
-    private IEnumerator RestartFlipperWithDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        RestartFlipper();
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Ground"))
         {
             EnterGroundState();
+        }
+        else if (collision.collider.CompareTag("Ball"))
+        {
+
         }
     }
 

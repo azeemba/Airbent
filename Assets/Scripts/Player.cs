@@ -80,19 +80,25 @@ public class Player : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Ground") || collision.collider.CompareTag("Wall"))
         {
-            EnterGroundState();
+            Debug.Log("Collision count: " + collision.contactCount);
+            for (int i = 0; i < collision.contactCount; ++i)
+            {
+                ContactPoint2D contact = collision.GetContact(i);
+                Debug.Log(contact.normal.ToString());
+                if (Mathf.Abs(contact.normal.x) < 0.01)
+                {
+                    EnterGroundState();
+                    break;
+                }
+            }
         }
-        else if (collision.collider.CompareTag("Ball"))
-        {
-
-        }
-    }
+   }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Ground") || collision.collider.CompareTag("Wall"))
         {
             ExitGroundState();
         }

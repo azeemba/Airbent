@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212547707701477716}
   - component: {fileID: 50109028935865396}
   - component: {fileID: 58305711470983804}
+  - component: {fileID: 114760664656334738}
   - component: {fileID: 114359041009565464}
   m_Layer: 8
   m_Name: Ball
@@ -89,6 +90,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ded7b6516407cb4e83467a82d5950e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114760664656334738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048818065669784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba2f6d49a25b8c4d99c79becb92b172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceCount: 1
+  hitCount: 1
+  isDamaged: 0
 --- !u!212 &212547707701477716
 SpriteRenderer:
   m_ObjectHideFlags: 1

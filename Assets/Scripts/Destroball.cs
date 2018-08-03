@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Destroball : MonoBehaviour {
 
-    private bool frozen;
     private Rigidbody2D rigid;
+    private Destroyable destroyableHandle;
 
 	// Use this for initialization
 	void Start ()
     {
         rigid = GetComponent<Rigidbody2D>();
         rigid.sleepMode = RigidbodySleepMode2D.StartAsleep;
+
+        destroyableHandle = GetComponent<Destroyable>();
 	}
 	
 	// Update is called once per frame
@@ -19,6 +21,11 @@ public class Destroball : MonoBehaviour {
     {
 		
 	}
+
+    private void HandleDestroy()
+    {
+        Destroy(gameObject);
+    }
 
     public void Reset(Vector2 position)
     {
@@ -29,11 +36,9 @@ public class Destroball : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ground") ||
-            collision.collider.CompareTag("Wall"))
+        if (destroyableHandle.IsDestroyed())
         {
-            Debug.Log("Ball hit ground or wall");
-            Destroy(gameObject);
+            HandleDestroy();
         }
     }
 }

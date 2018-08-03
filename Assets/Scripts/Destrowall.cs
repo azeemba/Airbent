@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Destrowall : MonoBehaviour {
 
+    private Destroyable destroyableHandle;
+
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+        destroyableHandle = GetComponent<Destroyable>();
 	}
 	
 	// Update is called once per frame
@@ -14,12 +17,17 @@ public class Destrowall : MonoBehaviour {
 		
 	}
 
+    private void HandleDestroy()
+    {
+        Destroy(gameObject);
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ball"))
+
+        if (destroyableHandle.IsDestroyed())
         {
-            Debug.Log("Ball hit ground or wall");
-            Destroy(gameObject);
+            HandleDestroy();
         }
     }
 }

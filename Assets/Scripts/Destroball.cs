@@ -5,7 +5,10 @@ using UnityEngine;
 public class Destroball : MonoBehaviour {
 
     private Rigidbody2D rigid;
-    private Destroyable destroyableHandle;
+    private BounceCountable bounceCountable;
+    private SpriteRenderer spriteRenderer;
+
+    public List<Sprite> spriteByHP;
 
 	// Use this for initialization
 	void Start ()
@@ -13,32 +16,41 @@ public class Destroball : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         rigid.sleepMode = RigidbodySleepMode2D.StartAsleep;
 
-        destroyableHandle = GetComponent<Destroyable>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        bounceCountable = GetComponent<BounceCountable>();
+
+        bounceCountable.BounceDestroyEvent += HandleDestroy;
+        bounceCountable.BounceHitEvent += HandleHit;
+
+        UpdateSprite(bounceCountable.hitCount);
 	}
 	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
-
     private void HandleDestroy()
     {
         Destroy(gameObject);
     }
 
-    public void Reset(Vector2 position)
+    private void UpdateSprite(int newHp)
     {
-        rigid.sleepMode = RigidbodySleepMode2D.StartAsleep;
-        transform.position = position;
-        rigid.velocity = Vector2.zero;
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (destroyableHandle.IsDestroyed())
+        if (newHp <= 0)
         {
-            HandleDestroy();
+            //destroy will be called
+            return;
+        }
+        else if (newHp > spriteByHP.Count)
+        {
+            // I am going to wait for HP to get to my level
+            return;
+        }
+        else
+        {
+            spriteRenderer.sprite = spriteByHP[newHp - 1];
         }
     }
+    private void HandleHit(int newHp)
+    {
+        UpdateSprite(newHp);
+    }
+
 }

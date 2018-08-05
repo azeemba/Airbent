@@ -4,30 +4,23 @@ using UnityEngine;
 
 public class Destrowall : MonoBehaviour {
 
-    private Destroyable destroyableHandle;
+    private BounceCountable bounceCountable;
 
 	// Use this for initialization
 	void Start ()
     {
-        destroyableHandle = GetComponent<Destroyable>();
+        bounceCountable = GetComponent<BounceCountable>();
+
+        bounceCountable.BounceDestroyEvent += HandleDestroy;
+        bounceCountable.BounceHitEvent += HandleHit;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     private void HandleDestroy()
     {
         Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void HandleHit(int newHp)
     {
-
-        if (destroyableHandle.IsDestroyed())
-        {
-            HandleDestroy();
-        }
     }
 }

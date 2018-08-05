@@ -7,8 +7,12 @@ public class Destroball : MonoBehaviour {
     private Rigidbody2D rigid;
     private BounceCountable bounceCountable;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
 
     public List<Sprite> spriteByHP;
+    public List<Sprite> spriteDestro;
+    public AudioClip bounceAudio;
+    public AudioClip destroyAudio;
 
 	// Use this for initialization
 	void Start ()
@@ -18,8 +22,9 @@ public class Destroball : MonoBehaviour {
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        bounceCountable = GetComponent<BounceCountable>();
+        audioSource = GetComponent<AudioSource>();
 
+        bounceCountable = GetComponent<BounceCountable>();
         bounceCountable.BounceDestroyEvent += HandleDestroy;
         bounceCountable.BounceHitEvent += HandleHit;
 
@@ -28,6 +33,32 @@ public class Destroball : MonoBehaviour {
 	
     private void HandleDestroy()
     {
+        audioSource.PlayOneShot(destroyAudio);
+        StartCoroutine(AnimateDestroy());
+    }
+
+    private IEnumerator AnimateDestroy()
+    {
+        float alphaSteps = 5f;
+        float i = 0;
+        Color transparent = new Color(1, 1, 1, 0);
+        foreach (Sprite s in spriteDestro)
+        {
+            spriteRenderer.sprite = s;
+            spriteRenderer.color = Color.Lerp(
+                Color.white, transparent, i/alphaSteps);
+            i++;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        while (i < alphaSteps)
+        {
+            spriteRenderer.color = Color.Lerp(
+                Color.white, transparent, i/alphaSteps);
+            i++;
+            yield return new WaitForSeconds(0.1f);
+        }
+
         Destroy(gameObject);
     }
 
@@ -50,6 +81,7 @@ public class Destroball : MonoBehaviour {
     }
     private void HandleHit(int newHp)
     {
+        audioSource.PlayOneShot(bounceAudio);
         UpdateSprite(newHp);
     }
 

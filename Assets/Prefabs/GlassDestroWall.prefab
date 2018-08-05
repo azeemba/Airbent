@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114748834417235618}
   - component: {fileID: 82274915882725514}
   m_Layer: 0
-  m_Name: DestroWall
+  m_Name: GlassDestroWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.000000029802322, y: 0.03281319}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -67,7 +67,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.69999367, y: 2.153149}
   m_EdgeRadius: 0
 --- !u!82 &82274915882725514
 AudioSource:
@@ -191,13 +191,12 @@ MonoBehaviour:
   spriteByHP:
   - {fileID: 21300000, guid: 835e53924fdedcd40ba95a4aa52a465c, type: 3}
   spriteDestro:
-  - {fileID: 21300000, guid: d433c854e291b734f8be1f6346046c7d, type: 3}
   - {fileID: 21300000, guid: e1bedb196fda733448a6bebfd6646cd1, type: 3}
   - {fileID: 21300000, guid: c5578f734e9aa4742b5a3e66d971a208, type: 3}
   - {fileID: 21300000, guid: 5a1e1a5fba32ec944856d7fb052e584c, type: 3}
   bounceAudio: {fileID: 0}
   destroyAudio: {fileID: 8300000, guid: b434a20509c9d164a93e8fd11dbd42d7, type: 3}
-  timePerDestroFrame: 0.12
+  timePerDestroFrame: 0.05
 --- !u!212 &212740128743107368
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -22,7 +22,11 @@ public class DestroSource: MonoBehaviour {
             Destroy(destroLiveObj);
         }
 
-        destroLiveObj = (GameObject)Instantiate(destroPrefab, transform.position, Quaternion.identity);
+        destroLiveObj = Instantiate(
+            destroPrefab,
+            transform.position,
+            Quaternion.identity,
+            transform);
     }
 
     private void HandleResetEvent(ResetArea resetArea)

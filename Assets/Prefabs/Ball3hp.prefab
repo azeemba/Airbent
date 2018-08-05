@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114760664656334738}
   - component: {fileID: 114359041009565464}
   m_Layer: 8
-  m_Name: Ball4hp
+  m_Name: Ball3hp
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +99,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: af87202fd9a32334f82977fb009d07c4, type: 3}
   - {fileID: 21300000, guid: 084a7065442d85c42932787de6e81b33, type: 3}
   - {fileID: 21300000, guid: 35617f092ac4cef4096a2138f5491f4c, type: 3}
+  bounceAudio: {fileID: 8300000, guid: b980801c80b1920479033a79198e40c3, type: 3}
+  destroyAudio: {fileID: 8300000, guid: 0f52be01f38e6484c8293666039e9714, type: 3}
+  timePerDestroFrame: 0.1
 --- !u!114 &114760664656334738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba2f6d49a25b8c4d99c79becb92b172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitCount: 4
+  hitCount: 3
   isDamaged: 0
 --- !u!212 &212547707701477716
 SpriteRenderer:

@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114748834417235618}
   - component: {fileID: 82274915882725514}
   m_Layer: 0
-  m_Name: WoodDestroWall
+  m_Name: DestroWallStone
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba2f6d49a25b8c4d99c79becb92b172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitCount: 2
+  hitCount: 3
   isDamaged: 0
 --- !u!114 &114748834417235618
 MonoBehaviour:
@@ -189,15 +189,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteByHP:
-  - {fileID: 21300000, guid: ca2e828b2ce7f814aa4e4bb61762f8ba, type: 3}
-  - {fileID: 21300000, guid: 4564df4c236c281488deeee938025ce2, type: 3}
+  - {fileID: 21300000, guid: 5ebf43da5eb4cbe4fb05f96f7b2e414f, type: 3}
+  - {fileID: 21300000, guid: 4186d80763c7a1d458bc135f3388626a, type: 3}
+  - {fileID: 21300000, guid: 0039333cd40e8ca47bfc60e75852ac7f, type: 3}
   spriteDestro:
-  - {fileID: 21300000, guid: bef0c4c28a5bbc04ab9fd7efb3940d2f, type: 3}
-  - {fileID: 21300000, guid: 7527f9b62b2fa93488d8236ec9cf5efc, type: 3}
-  - {fileID: 21300000, guid: d263f0aacc548a841a2f8fe98691c9ba, type: 3}
+  - {fileID: 21300000, guid: 5786f6a2db537584ab9bb8765f3ee024, type: 3}
+  - {fileID: 21300000, guid: 20c4ef927001fe04299c7d799e91e6d7, type: 3}
+  - {fileID: 21300000, guid: 1315487e3213790479f9af45604fd440, type: 3}
   bounceAudio: {fileID: 0}
-  destroyAudio: {fileID: 8300000, guid: b434a20509c9d164a93e8fd11dbd42d7, type: 3}
-  timePerDestroFrame: 0.05
+  destroyAudio: {fileID: 8300000, guid: 170e9c9a3f8b6b940b41148a660b25c5, type: 3}
+  timePerDestroFrame: 0.1
 --- !u!212 &212740128743107368
 SpriteRenderer:
   m_ObjectHideFlags: 1

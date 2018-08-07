@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114748834417235618}
   - component: {fileID: 82274915882725514}
   m_Layer: 0
-  m_Name: GlassDestroWall
+  m_Name: DestroWallGlass
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

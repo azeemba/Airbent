@@ -46,9 +46,9 @@ public class BounceDestroAV : MonoBehaviour {
         foreach (Sprite s in spriteDestro)
         {
             spriteRenderer.sprite = s;
-            spriteRenderer.color = Color.Lerp(
-                Color.white, transparent, i/alphaSteps);
-            i++;
+            // spriteRenderer.color = Color.Lerp(
+            //    Color.white, transparent, i/alphaSteps);
+            // i++;
             yield return new WaitForSeconds(timePerDestroFrame);
         }
 

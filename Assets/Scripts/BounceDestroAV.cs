@@ -31,7 +31,7 @@ public class BounceDestroAV : MonoBehaviour {
     {
         if (destroyAudio != null)
         {
-            audioSource.PlayOneShot(destroyAudio);
+            //audioSource.PlayOneShot(destroyAudio);
         }
         StartCoroutine(AnimateDestroy());
     }
